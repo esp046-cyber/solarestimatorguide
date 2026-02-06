@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FF6B00">
+    <title>2026 Commercial Solar Estimator Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #FF6B00;
+            --dark-bg: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --accent-yellow: #FDB913;
+            --success-green: #4CAF50;
+            --border-color: #404040;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #2d2d2d 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 1%;
+            padding: 0;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1%;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #cc5500 100%);
+            padding: 12px 1%;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        h1 {
+            font-size: 1.3em;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            margin: 4px 0;
+        }
+
+        .sun-icon {
+            font-size: 1.5em;
+            display: inline-block;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.85em;
+            opacity: 0.95;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-orange);
+        }
+
+        .card-icon {
+            font-size: 1.4em;
+            margin-right: 8px;
+            min-width: 30px;
+        }
+
+        h2 {
+            font-size: 1.1em;
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1em;
+            color: var(--primary-orange);
+            margin: 10px 0 6px 0;
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-orange);
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, rgba(255,107,0,0.2) 0%, transparent 100%);
+            padding: 8px;
+            border-radius: 4px;
+            margin: 8px 0;
+            border-left: 3px solid var(--primary-orange);
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+
+        .badge.green {
+            background: var(--success-green);
+        }
+
+        .badge.yellow {
+            background: var(--accent-yellow);
+            color: var(--dark-bg);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .info-box {
+            background: rgba(255,107,0,0.1);
+            border: 1px solid var(--primary-orange);
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .info-box-label {
+            font-size: 0.75em;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .info-box-value {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--accent-yellow);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #cc5500 100%);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 10px 0;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
+        }
+
+        .cta-section h3 {
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .cta-section p {
+            font-size: 0.9em;
+            margin: 4px 0;
+        }
+
+        .tutorial-section {
+            margin-top: 12px;
+        }
+
+        .tutorial-item {
+            background: rgba(255,107,0,0.05);
+            border-left: 3px solid var(--primary-orange);
+            margin: 8px 0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .tutorial-header {
+            padding: 10px 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,107,0,0.1);
+            transition: background 0.3s;
+        }
+
+        .tutorial-header:active {
+            background: rgba(255,107,0,0.2);
+        }
+
+        .tutorial-title {
+            font-weight: 600;
+            font-size: 0.95em;
+            color: var(--text-primary);
+            flex: 1;
+        }
+
+        .tutorial-icon {
+            font-size: 1.2em;
+            margin-right: 8px;
+            min-width: 25px;
+        }
+
+        .expand-icon {
+            font-size: 0.8em;
+            color: var(--primary-orange);
+            transition: transform 0.3s;
+        }
+
+        .tutorial-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0 12px;
+        }
+
+        .tutorial-content.active {
+            max-height: 2000px;
+            padding: 12px;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 10px 0 10px 35px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,107,0,0.1);
+        }
+
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 8px;
+            background: var(--primary-orange);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .tip-box {
+            background: rgba(253,185,19,0.1);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .tip-box strong {
+            color: var(--accent-yellow);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .warning-box {
+            background: rgba(244,67,54,0.1);
+            border: 1px solid #f44336;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .warning-box strong {
+            color: #ff6b6b;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .example-box {
+            background: rgba(76,175,80,0.1);
+            border: 1px solid var(--success-green);
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.85em;
+        }
+
+        .example-box strong {
+            color: var(--success-green);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .calculator-box {
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .calculator-box label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .calculator-box input {
+            font-size: 1em;
+        }
+
+        .calculator-box button:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .formula-box {
+            font-size: 0.9em;
+        }
+
+        .formula-box strong {
+            color: var(--primary-orange);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        table {
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 360px) {
+            h1 { font-size: 1.1em; }
+            h2 { font-size: 1em; }
+            li { font-size: 0.85em; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="sun-icon">☀️</span> 2026 Part-Time Commercial Solar Estimator</h1>
+            <div class="subtitle">Clean Energy Career Guide</div>
+        </header>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🎯</div>
+                <h2>Position Overview</h2>
+            </div>
+            <p>Join our expanding clean energy team supporting commercial solar PV projects across Greater Melbourne or remotely. Perfect for experienced professionals familiar with the Australian commercial solar market.</p>
+            
+            <div class="info-grid">
+                <div class="info-box">
+                    <div class="info-box-label">Work Type</div>
+                    <div class="info-box-value">Part-Time</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-box-label">Location</div>
+                    <div class="info-box-value">Melbourne/Remote</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-box-label">Schedule</div>
+                    <div class="info-box-value">Flexible Hours</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-box-label">Time Zone</div>
+                    <div class="info-box-value">AU Time</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">📋</div>
+                <h2>Key Responsibilities & Tutorials</h2>
+            </div>
+            
+            <p style="margin-bottom: 12px; font-size: 0.9em; color: var(--text-secondary);">Tap each responsibility below to view detailed step-by-step guides and best practices.</p>
+
+            <div class="tutorial-section">
+                <!-- Tutorial 1: Cost Estimates -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">💰</span>
+                            <span class="tutorial-title">Prepare Accurate Cost Estimates</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Step-by-Step Guide</h3>
+                        <ol class="step-list">
+                            <li><strong>Obtain Project Documentation</strong><br>Review tender documents, architectural drawings, and electrical schematics. Identify system size (kW), roof type, mounting requirements, and electrical infrastructure.</li>
+                            <li><strong>Conduct Site Assessment Review</strong><br>Analyze site photos, shading analysis, roof orientation, and structural capacity reports. Note any access restrictions or special equipment needs.</li>
+                            <li><strong>Calculate System Components</strong><br>Determine panel quantity, inverter sizing, mounting hardware, cabling requirements, and switchboard upgrades needed.</li>
+                            <li><strong>Price All Materials</strong><br>Get current pricing from approved suppliers for panels, inverters, racking, cables, and electrical components. Factor in bulk discounts and delivery costs.</li>
+                            <li><strong>Estimate Labour Hours</strong><br>Calculate installation time based on system size, roof complexity, and crew size. Include design, installation, electrical, and commissioning hours.</li>
+                            <li><strong>Add Project Costs</strong><br>Include permits, engineering certifications, scaffolding, crane hire, insurance, and project management overhead.</li>
+                            <li><strong>Apply Margins & Contingencies</strong><br>Add profit margin (typically 15-25%) and contingency (5-10%) for unforeseen issues or price fluctuations.</li>
+                            <li><strong>Compile Final Estimate</strong><br>Create detailed breakdown showing materials, labour, project costs, margins, and total project value with GST.</li>
+                        </ol>
+
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong>
+                            Always maintain a database of historical project costs to benchmark new estimates. Track actual vs estimated costs to improve accuracy over time.
+                        </div>
+
+                        <div class="example-box">
+                            <strong>📊 Example: 100kW Commercial Rooftop</strong>
+                            Materials: $65,000 | Labour: $18,000 | Project Costs: $7,000 | Subtotal: $90,000 | Margin (20%): $18,000 | Contingency (7%): $7,560 | Total (ex GST): $115,560
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutorial 2: BOMs and Models -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">📊</span>
+                            <span class="tutorial-title">Develop BOMs, Labour Models & Margins</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">BOM Development Process</h3>
+                        <ol class="step-list">
+                            <li><strong>Create Master Component List</strong><br>List all materials: solar panels, inverters, mounting rails, clamps, cables (DC & AC), connectors, isolators, switchgear, conduit, and labelling.</li>
+                            <li><strong>Calculate Quantities</strong><br>Use system design to determine exact quantities. Add 5% wastage for cables and consumables. Include installation hardware and fixings.</li>
+                            <li><strong>Source Current Pricing</strong><br>Obtain quotes from minimum 3 suppliers. Negotiate volume discounts. Verify stock availability and lead times.</li>
+                            <li><strong>Build Labour Model</strong><br>Break down by task: site prep (4hrs), panel installation (0.5hr/panel), electrical (8hrs/100kW), testing & commissioning (4hrs). Multiply by hourly rate ($65-$85/hr).</li>
+                            <li><strong>Calculate Total Costs</strong><br>Sum all material costs + labour costs. Add equipment hire (crane, scissor lift, scaffolding) if required.</li>
+                            <li><strong>Apply Margin Strategy</strong><br>Standard projects: 15-20% margin. Complex/risk: 25-30% margin. High-volume/competitive: 10-15% margin.</li>
+                            <li><strong>Set Contingency Levels</strong><br>Standard projects: 5-7%. Older buildings: 8-12%. First-time customer/complex site: 10-15%.</li>
+                            <li><strong>Document Assumptions</strong><br>Note all assumptions: crane access, roof condition, electrical capacity, weather allowances, and any exclusions.</li>
+                        </ol>
+
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong>
+                            Create template BOMs for common system sizes (50kW, 100kW, 200kW) to speed up estimation. Update templates quarterly with current pricing.
+                        </div>
+
+                        <div class="example-box">
+                            <strong>📋 Sample BOM Extract - 100kW System</strong>
+                            • 250x 400W panels @ $180 = $45,000<br>
+                            • 1x 100kW inverter @ $12,000<br>
+                            • Mounting system @ $15,000<br>
+                            • Electrical/cables @ $8,000<br>
+                            Labour: 120hrs @ $75 = $9,000
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutorial 3: Review Drawings -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">📐</span>
+                            <span class="tutorial-title">Review Drawings, Specs & Scopes</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Document Review Checklist</h3>
+                        <ol class="step-list">
+                            <li><strong>Review Architectural Drawings</strong><br>Check roof plans, elevations, and structural details. Identify roof type (metal, concrete, tile), pitch, orientation, and dimensions. Note skylights, vents, and obstructions.</li>
+                            <li><strong>Analyze Electrical Drawings</strong><br>Review single-line diagrams, switchboard layouts, and cable routes. Verify existing capacity, available space for new equipment, and connection points.</li>
+                            <li><strong>Study Technical Specifications</strong><br>Read equipment requirements (panel/inverter specs), performance criteria, warranty requirements, and Australian Standards compliance (AS/NZS 5033, AS/NZS 3000).</li>
+                            <li><strong>Understand Project Scope</strong><br>Identify what's included: design, supply, installation, commissioning, documentation. Note exclusions: upgrades to existing infrastructure, structural modifications.</li>
+                            <li><strong>Check for Conflicts</strong><br>Look for inconsistencies between drawings and specifications. Identify clashes with HVAC, fire systems, or other services.</li>
+                            <li><strong>Assess Complexity Factors</strong><br>Evaluate access challenges, working at heights requirements, heritage overlays, council restrictions, and grid connection complexity.</li>
+                            <li><strong>Prepare RFI List</strong><br>Document all unclear items, missing information, or conflicts. Submit Request for Information (RFI) to client or consultant promptly.</li>
+                            <li><strong>Document Assumptions</strong><br>Record all assumptions made where information is unclear. These protect your estimate and tender submission.</li>
+                        </ol>
+
+                        <div class="warning-box">
+                            <strong>⚠️ Common Pitfalls:</strong>
+                            Don't assume roof structural capacity is adequate. Always flag if structural certification is not provided. Missing this can lead to major cost blowouts.
+                        </div>
+
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong>
+                            Create a standard RFI template for missing information. Address: structural certification, electrical capacity, access restrictions, roof warranty implications, and asbestos reports.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutorial 4: Estimate One Engagement -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">🤝</span>
+                            <span class="tutorial-title">Engage via Estimate One Platform</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Estimate One Workflow</h3>
+                        <ol class="step-list">
+                            <li><strong>Set Up Profile & Preferences</strong><br>Complete company profile with capabilities, insurance details, and service areas. Set notification preferences for relevant tender categories (Solar, Electrical, Renewable Energy).</li>
+                            <li><strong>Search for Opportunities</strong><br>Use filters: location (Greater Melbourne), trade (Solar/Electrical), project value, and closing date. Set up saved searches for automatic notifications.</li>
+                            <li><strong>Review Tender Documents</strong><br>Download all drawings, specifications, and tender schedules. Check addendums and clarifications. Note mandatory requirements and submission deadline.</li>
+                            <li><strong>Express Interest (EOI)</strong><br>Submit Expression of Interest for projects of suitable size and complexity. This signals to builders you're interested and keeps you in their network.</li>
+                            <li><strong>Submit Questions</strong><br>Use the platform's Q&A function for clarifications. Questions and answers become visible to all tenderers, ensuring fair process.</li>
+                            <li><strong>Prepare and Upload Quote</strong><br>Complete required quote forms. Upload detailed breakdown, methodology, program, and company credentials. Ensure all mandatory attachments are included.</li>
+                            <li><strong>Track Submission Status</strong><br>Monitor quote status: submitted, viewed, shortlisted. Follow up with builders on shortlisted quotes via the platform's messaging.</li>
+                            <li><strong>Build Relationships</strong><br>After project award, request feedback on unsuccessful quotes. Connect with new builders for future opportunities. Maintain regular engagement.</li>
+                        </ol>
+
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong>
+                            Login daily to check new tenders. Best opportunities are often won by early respondents who engage quickly. Set up mobile notifications for urgent tenders.
+                        </div>
+
+                        <div class="example-box">
+                            <strong>🎯 Success Strategy:</strong>
+                            Target 10-15 active tenders per week. Aim for 30-40% quote submission rate. Typical win rate: 15-20% of submitted quotes. Focus on builders you've worked with previously for higher success.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutorial 5: Supplier Pricing -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">💵</span>
+                            <span class="tutorial-title">Obtain & Validate Pricing</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Pricing Procurement Process</h3>
+                        <ol class="step-list">
+                            <li><strong>Identify Suppliers & Subcontractors</strong><br>Maintain database of approved suppliers for panels, inverters, mounting, electrical. Vet subcontractors for licensing, insurance, and track record.</li>
+                            <li><strong>Prepare RFQ Package</strong><br>Create clear scope of work, specifications, quantities, delivery requirements, and payment terms. Include project timeline and site location.</li>
+                            <li><strong>Request Multiple Quotes</strong><br>Send RFQ to minimum 3 suppliers per category. Ensure like-for-like comparisons with identical specifications. Set clear response deadline.</li>
+                            <li><strong>Evaluate Quotations</strong><br>Compare pricing, delivery times, warranty terms, and payment conditions. Check for hidden costs: freight, after-hours delivery, crane unloading.</li>
+                            <li><strong>Validate Pricing Accuracy</strong><br>Cross-reference against recent projects and market benchmarks. Query any prices that seem unusually high or low. Verify stock availability for quoted items.</li>
+                            <li><strong>Check Supplier Credentials</strong><br>Confirm current insurance (public liability $20M+, product liability). Verify manufacturer authorizations and warranty support. Check references for reliability.</li>
+                            <li><strong>Negotiate Terms</strong><br>Negotiate volume discounts for multi-project commitments. Discuss payment terms (typically 30-day account). Clarify defect warranty and return policies.</li>
+                            <li><strong>Document & File</strong><br>Save all quotes with date stamps and validity periods. Create comparison spreadsheet. Update pricing database for future estimates.</li>
+                        </ol>
+
+                        <div class="warning-box">
+                            <strong>⚠️ Red Flags:</strong>
+                            Prices >20% below market average often indicate inferior quality or grey imports. Verify product certifications (CEC approved) and Australian warranty support before acceptance.
+                        </div>
+
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong>
+                            Build long-term relationships with 2-3 preferred suppliers per category. Better pricing, priority stock allocation, and extended payment terms come with proven track record and volume commitment.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutorial 6: Tender Support -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">📄</span>
+                            <span class="tutorial-title">Support Tenders, RFQs & Proposals</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Tender Preparation Guide</h3>
+                        <ol class="step-list">
+                            <li><strong>Understand Tender Requirements</strong><br>Read tender documents thoroughly. Create compliance checklist for all mandatory requirements. Note evaluation criteria and weightings (price, quality, experience, program).</li>
+                            <li><strong>Develop Pricing Strategy</strong><br>Assess competition level and project desirability. Decide margin based on risk, opportunity value, and relationship potential. Balance competitiveness with profitability.</li>
+                            <li><strong>Create Detailed Breakdown</strong><br>Provide transparent cost breakdown: materials (by category), labour (by task), project costs, margins. Show clear methodology and assumptions.</li>
+                            <li><strong>Write Technical Methodology</strong><br>Describe installation approach, safety procedures, quality control, and program. Address specific site challenges and proposed solutions. Include staging and sequencing.</li>
+                            <li><strong>Compile Company Credentials</strong><br>Include relevant project experience (similar size/type), client references, team qualifications (CEC accredited designers/installers), certifications (AS/NZS 5033, electrical license).</li>
+                            <li><strong>Develop Program Schedule</strong><br>Create realistic timeline from order to commissioning. Show key milestones: design, procurement, installation, testing, handover. Allow for weather delays and approvals.</li>
+                            <li><strong>Address Evaluation Criteria</strong><br>Tailor response to match evaluation criteria. Highlight strengths in price, quality, experience, safety, and innovation. Provide evidence for claims.</li>
+                            <li><strong>Quality Check & Submit</strong><br>Review for completeness, accuracy, and clarity. Check all calculations. Ensure professional presentation. Submit before deadline with confirmation of receipt.</li>
+                        </ol>
+
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong>
+                            Create template sections for common requirements: company overview, safety policy, quality procedures, standard T&Cs. Customize for each tender but maintain core content library.
+                        </div>
+
+                        <div class="example-box">
+                            <strong>📋 Winning Tender Checklist:</strong>
+                            ✓ Competitive pricing (within 10% of likely average)<br>
+                            ✓ Clear, detailed scope & exclusions<br>
+                            ✓ Relevant project examples with references<br>
+                            ✓ Realistic program with contingencies<br>
+                            ✓ Professional presentation & formatting
+                        </div>
+
+                        <div class="warning-box">
+                            <strong>⚠️ Avoid These Mistakes:</strong>
+                            Missing mandatory requirements = instant disqualification. Late submissions = not considered. Incomplete pricing = assumptions against you. Always double-check before submitting!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🎓</div>
+                <h2>Beginner's Learning Hub</h2>
+            </div>
+            
+            <p style="margin-bottom: 12px; font-size: 0.9em; color: var(--text-secondary);">Essential tools, calculators, and knowledge for newcomers to commercial solar estimation.</p>
+
+            <div class="tutorial-section">
+                <!-- Solar Basics Calculator -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">🧮</span>
+                            <span class="tutorial-title">Solar System Calculator</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Basic System Sizing Calculator</h3>
+                        
+                        <div class="calculator-box">
+                            <label>Daily Energy Usage (kWh):</label>
+                            <input type="number" id="dailyUsage" placeholder="e.g., 400" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <label>Peak Sun Hours (Melbourne avg: 4.5):</label>
+                            <input type="number" id="sunHours" value="4.5" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <label>System Efficiency (typically 75-85%):</label>
+                            <input type="number" id="efficiency" value="80" placeholder="80" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <button onclick="calculateSystemSize()" style="width: 100%; padding: 10px; margin: 10px 0; background: var(--primary-orange); color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 1em; cursor: pointer;">Calculate System Size</button>
+                            
+                            <div id="systemResult" style="display: none; margin-top: 10px; padding: 12px; background: rgba(76,175,80,0.1); border: 1px solid var(--success-green); border-radius: 6px;">
+                                <strong style="color: var(--success-green);">Results:</strong>
+                                <div id="resultText" style="margin-top: 8px; line-height: 1.8;"></div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box" style="margin-top: 15px;">
+                            <strong>💡 How to Use:</strong>
+                            Enter the building's daily energy consumption (check electricity bills). The calculator determines the recommended solar system size in kW. Formula: System Size = (Daily Usage ÷ Peak Sun Hours) ÷ (Efficiency ÷ 100)
+                        </div>
+
+                        <div class="example-box">
+                            <strong>📊 Example:</strong>
+                            Office using 400 kWh/day → (400 ÷ 4.5) ÷ 0.8 = 111 kW system needed
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost Estimation Calculator -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">💰</span>
+                            <span class="tutorial-title">Quick Cost Estimator</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Ballpark Project Cost Calculator</h3>
+                        
+                        <div class="calculator-box">
+                            <label>System Size (kW):</label>
+                            <input type="number" id="systemSize" placeholder="e.g., 100" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <label>Cost per Watt (AUD):</label>
+                            <div style="display: flex; gap: 5px; margin: 5px 0;">
+                                <button onclick="setPerWatt(0.90)" style="flex: 1; padding: 8px; background: var(--card-bg); color: white; border: 1px solid var(--primary-orange); border-radius: 4px; cursor: pointer;">Budget<br>$0.90/W</button>
+                                <button onclick="setPerWatt(1.10)" style="flex: 1; padding: 8px; background: var(--card-bg); color: white; border: 1px solid var(--primary-orange); border-radius: 4px; cursor: pointer;">Standard<br>$1.10/W</button>
+                                <button onclick="setPerWatt(1.30)" style="flex: 1; padding: 8px; background: var(--card-bg); color: white; border: 1px solid var(--primary-orange); border-radius: 4px; cursor: pointer;">Premium<br>$1.30/W</button>
+                            </div>
+                            <input type="number" id="costPerWatt" value="1.10" step="0.05" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <label>Profit Margin (%):</label>
+                            <input type="number" id="margin" value="20" placeholder="20" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <button onclick="calculateCost()" style="width: 100%; padding: 10px; margin: 10px 0; background: var(--primary-orange); color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 1em; cursor: pointer;">Calculate Project Cost</button>
+                            
+                            <div id="costResult" style="display: none; margin-top: 10px; padding: 12px; background: rgba(76,175,80,0.1); border: 1px solid var(--success-green); border-radius: 6px;">
+                                <strong style="color: var(--success-green);">Cost Breakdown:</strong>
+                                <div id="costText" style="margin-top: 8px; line-height: 2;"></div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box" style="margin-top: 15px;">
+                            <strong>💡 Industry Benchmarks (2026):</strong>
+                            Budget: $0.80-$1.00/W | Standard: $1.00-$1.20/W | Premium: $1.20-$1.50/W. Prices vary by location, roof complexity, and equipment quality.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROI Calculator -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">📈</span>
+                            <span class="tutorial-title">Return on Investment (ROI) Calculator</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Payback Period Calculator</h3>
+                        
+                        <div class="calculator-box">
+                            <label>Total System Cost (AUD):</label>
+                            <input type="number" id="totalCost" placeholder="e.g., 110000" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <label>Annual Energy Production (kWh):</label>
+                            <input type="number" id="annualProduction" placeholder="e.g., 150000" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <label>Electricity Rate ($/kWh):</label>
+                            <input type="number" id="electricityRate" value="0.28" step="0.01" placeholder="0.28" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 4px; border: 1px solid var(--border-color); background: var(--dark-bg); color: white;">
+                            
+                            <button onclick="calculateROI()" style="width: 100%; padding: 10px; margin: 10px 0; background: var(--primary-orange); color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 1em; cursor: pointer;">Calculate ROI</button>
+                            
+                            <div id="roiResult" style="display: none; margin-top: 10px; padding: 12px; background: rgba(76,175,80,0.1); border: 1px solid var(--success-green); border-radius: 6px;">
+                                <strong style="color: var(--success-green);">Investment Analysis:</strong>
+                                <div id="roiText" style="margin-top: 8px; line-height: 2;"></div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box" style="margin-top: 15px;">
+                            <strong>💡 Quick Formula:</strong>
+                            Annual Savings = Annual Production × Electricity Rate<br>
+                            Payback Period = Total Cost ÷ Annual Savings<br>
+                            Typical commercial payback: 3-6 years
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Essential Knowledge Base -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">📚</span>
+                            <span class="tutorial-title">Essential Solar Knowledge</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Key Terms & Concepts</h3>
+                        
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--primary-orange);">kW vs kWh:</strong>
+                            <p style="margin: 5px 0; padding-left: 10px;">• <strong>kW (Kilowatt)</strong> = System power capacity (size)<br>
+                            • <strong>kWh (Kilowatt-hour)</strong> = Energy produced/consumed<br>
+                            • Example: 100kW system produces ~150,000 kWh/year</p>
+                        </div>
+
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--primary-orange);">Solar Panel Types:</strong>
+                            <p style="margin: 5px 0; padding-left: 10px;">• <strong>Monocrystalline</strong> - Most efficient (20-22%), black, premium<br>
+                            • <strong>Polycrystalline</strong> - Good efficiency (15-17%), blue, cost-effective<br>
+                            • <strong>Bifacial</strong> - Captures light both sides, 10-20% extra production</p>
+                        </div>
+
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--primary-orange);">Inverter Types:</strong>
+                            <p style="margin: 5px 0; padding-left: 10px;">• <strong>String Inverters</strong> - Most common, cost-effective<br>
+                            • <strong>Microinverters</strong> - One per panel, best for shading<br>
+                            • <strong>Hybrid</strong> - Includes battery integration capability</p>
+                        </div>
+
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--primary-orange);">Key Performance Metrics:</strong>
+                            <p style="margin: 5px 0; padding-left: 10px;">• <strong>Peak Sun Hours</strong> - Melbourne: 4.5hrs/day average<br>
+                            • <strong>System Efficiency</strong> - Typically 75-85% (losses from heat, inverter, cables)<br>
+                            • <strong>Capacity Factor</strong> - Actual vs potential production (15-25%)<br>
+                            • <strong>Degradation</strong> - Panels lose 0.5-0.7% efficiency per year</p>
+                        </div>
+
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--primary-orange);">Australian Standards:</strong>
+                            <p style="margin: 5px 0; padding-left: 10px;">• <strong>AS/NZS 5033</strong> - Installation standard for PV arrays<br>
+                            • <strong>AS/NZS 3000</strong> - Electrical wiring rules<br>
+                            • <strong>CEC Approval</strong> - Clean Energy Council product approval<br>
+                            • <strong>STCs</strong> - Small-scale Technology Certificates (rebate)</p>
+                        </div>
+
+                        <div class="example-box" style="margin-top: 15px;">
+                            <strong>📖 Learning Path:</strong>
+                            Week 1-2: Understand kW vs kWh, panel types, basic sizing<br>
+                            Week 3-4: Learn inverters, mounting systems, electrical basics<br>
+                            Week 5-6: Study pricing, BOMs, estimation methods<br>
+                            Week 7-8: Practice with Estimate One, build supplier network
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Formulas -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">🔢</span>
+                            <span class="tutorial-title">Essential Formulas Cheat Sheet</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Must-Know Calculations</h3>
+                        
+                        <div class="formula-box" style="background: rgba(255,107,0,0.05); padding: 10px; margin: 10px 0; border-radius: 6px; border-left: 3px solid var(--primary-orange);">
+                            <strong>1. System Size Required:</strong>
+                            <div style="font-family: monospace; background: var(--dark-bg); padding: 8px; margin: 5px 0; border-radius: 4px;">
+                                System Size (kW) = Daily Usage (kWh) ÷ Peak Sun Hours ÷ Efficiency
+                            </div>
+                            <em style="font-size: 0.85em;">Example: 400 ÷ 4.5 ÷ 0.80 = 111 kW</em>
+                        </div>
+
+                        <div class="formula-box" style="background: rgba(255,107,0,0.05); padding: 10px; margin: 10px 0; border-radius: 6px; border-left: 3px solid var(--primary-orange);">
+                            <strong>2. Number of Panels:</strong>
+                            <div style="font-family: monospace; background: var(--dark-bg); padding: 8px; margin: 5px 0; border-radius: 4px;">
+                                Panel Count = System Size (W) ÷ Panel Wattage
+                            </div>
+                            <em style="font-size: 0.85em;">Example: 100,000W ÷ 400W = 250 panels</em>
+                        </div>
+
+                        <div class="formula-box" style="background: rgba(255,107,0,0.05); padding: 10px; margin: 10px 0; border-radius: 6px; border-left: 3px solid var(--primary-orange);">
+                            <strong>3. Annual Production:</strong>
+                            <div style="font-family: monospace; background: var(--dark-bg); padding: 8px; margin: 5px 0; border-radius: 4px;">
+                                Annual kWh = System Size (kW) × Peak Sun Hours × 365 × Efficiency
+                            </div>
+                            <em style="font-size: 0.85em;">Example: 100 × 4.5 × 365 × 0.80 = 131,400 kWh/year</em>
+                        </div>
+
+                        <div class="formula-box" style="background: rgba(255,107,0,0.05); padding: 10px; margin: 10px 0; border-radius: 6px; border-left: 3px solid var(--primary-orange);">
+                            <strong>4. Project Cost:</strong>
+                            <div style="font-family: monospace; background: var(--dark-bg); padding: 8px; margin: 5px 0; border-radius: 4px;">
+                                Total Cost = (System Size (W) × Cost per Watt) × (1 + Margin%)
+                            </div>
+                            <em style="font-size: 0.85em;">Example: (100,000 × $1.10) × 1.20 = $132,000</em>
+                        </div>
+
+                        <div class="formula-box" style="background: rgba(255,107,0,0.05); padding: 10px; margin: 10px 0; border-radius: 6px; border-left: 3px solid var(--primary-orange);">
+                            <strong>5. Payback Period:</strong>
+                            <div style="font-family: monospace; background: var(--dark-bg); padding: 8px; margin: 5px 0; border-radius: 4px;">
+                                Years = Total Cost ÷ (Annual Production × Electricity Rate)
+                            </div>
+                            <em style="font-size: 0.85em;">Example: $132,000 ÷ (131,400 × $0.28) = 3.6 years</em>
+                        </div>
+
+                        <div class="formula-box" style="background: rgba(255,107,0,0.05); padding: 10px; margin: 10px 0; border-radius: 6px; border-left: 3px solid var(--primary-orange);">
+                            <strong>6. Roof Area Required:</strong>
+                            <div style="font-family: monospace; background: var(--dark-bg); padding: 8px; margin: 5px 0; border-radius: 4px;">
+                                Area (m²) = Panel Count × Panel Area (typically 1.7-2.0 m²)
+                            </div>
+                            <em style="font-size: 0.85em;">Example: 250 panels × 1.9 m² = 475 m² minimum</em>
+                        </div>
+
+                        <div class="tip-box" style="margin-top: 15px;">
+                            <strong>💡 Quick Reference:</strong>
+                            Save these formulas on your phone! You'll use them daily for quick quotes and feasibility checks. Practice with real projects to build confidence.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Guidelines -->
+                <div class="tutorial-item">
+                    <div class="tutorial-header" onclick="toggleTutorial(this)">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <span class="tutorial-icon">💵</span>
+                            <span class="tutorial-title">2026 Pricing Guidelines</span>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3 style="margin-top: 0;">Commercial Solar Pricing Benchmarks</h3>
+                        
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--accent-yellow);">Equipment Costs (per unit):</strong>
+                            <table style="width: 100%; margin: 10px 0; border-collapse: collapse;">
+                                <tr style="background: rgba(255,107,0,0.1);">
+                                    <td style="padding: 8px; border: 1px solid var(--border-color);">Solar Panels (400W)</td>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color); text-align: right;">$180-$250</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color);">String Inverter (100kW)</td>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color); text-align: right;">$10,000-$15,000</td>
+                                </tr>
+                                <tr style="background: rgba(255,107,0,0.1);">
+                                    <td style="padding: 8px; border: 1px solid var(--border-color);">Mounting System (per kW)</td>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color); text-align: right;">$120-$180</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color);">Cables & Electrical</td>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color); text-align: right;">$80-$120/kW</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--accent-yellow);">Labour Rates (Melbourne 2026):</strong>
+                            <table style="width: 100%; margin: 10px 0; border-collapse: collapse;">
+                                <tr style="background: rgba(255,107,0,0.1);">
+                                    <td style="padding: 8px; border: 1px solid var(--border-color);">Solar Installer</td>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color); text-align: right;">$65-$80/hr</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color);">Licensed Electrician</td>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color); text-align: right;">$85-$110/hr</td>
+                                </tr>
+                                <tr style="background: rgba(255,107,0,0.1);">
+                                    <td style="padding: 8px; border: 1px solid var(--border-color);">CEC Accredited Designer</td>
+                                    <td style="padding: 8px; border: 1px solid var(--border-color); text-align: right;">$90-$120/hr</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--accent-yellow);">Installation Time Estimates:</strong>
+                            <p style="margin: 5px 0; padding-left: 10px;">• <strong>50kW System</strong>: 3-5 days (4-6 crew)<br>
+                            • <strong>100kW System</strong>: 5-8 days (4-6 crew)<br>
+                            • <strong>200kW System</strong>: 10-15 days (6-8 crew)<br>
+                            • Add 20-30% for complex roofs or difficult access</p>
+                        </div>
+
+                        <div style="margin: 10px 0;">
+                            <strong style="color: var(--accent-yellow);">Typical Margins by Project Size:</strong>
+                            <p style="margin: 5px 0; padding-left: 10px;">• <strong>Under 50kW</strong>: 20-30% (smaller, more complex)<br>
+                            • <strong>50-150kW</strong>: 15-25% (sweet spot)<br>
+                            • <strong>150-500kW</strong>: 12-20% (larger volume)<br>
+                            • <strong>500kW+</strong>: 10-15% (highly competitive)</p>
+                        </div>
+
+                        <div class="warning-box" style="margin-top: 15px;">
+                            <strong>⚠️ Price Variables:</strong>
+                            Prices vary significantly based on: roof type/condition, access difficulty, equipment brand/quality, electrical upgrades needed, structural modifications, location remoteness, and current market conditions.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">✅</div>
+                <h2>Requirements</h2>
+            </div>
+            
+            <h3>Essential Experience</h3>
+            <ul>
+                <li>Proven experience in commercial solar PV or electrical estimation</li>
+                <li>Strong understanding of the Australian commercial solar market</li>
+                <li>Experience using Estimate One for tender submissions</li>
+                <li>Advanced Excel and cost modelling skills</li>
+                <li>Ability to work independently in a part-time role</li>
+            </ul>
+
+            <h3>Core Competencies</h3>
+            <div style="margin-top: 8px;">
+                <span class="badge">Solar PV Systems</span>
+                <span class="badge">Cost Estimation</span>
+                <span class="badge">Estimate One</span>
+                <span class="badge green">Excel Mastery</span>
+                <span class="badge yellow">Tender Management</span>
+                <span class="badge">BOM Development</span>
+                <span class="badge green">Independent Work</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🔧</div>
+                <h2>Technical Skills Breakdown</h2>
+            </div>
+            
+            <h3>Estimation Expertise</h3>
+            <ul>
+                <li>Bill of Materials (BOM) creation and optimization</li>
+                <li>Labour cost modelling and resource planning</li>
+                <li>Margin calculation and contingency planning</li>
+                <li>Pricing validation and benchmarking</li>
+            </ul>
+
+            <h3>Platform & Tools</h3>
+            <ul>
+                <li>Estimate One platform proficiency</li>
+                <li>Advanced Microsoft Excel (formulas, macros, pivot tables)</li>
+                <li>Technical drawing interpretation</li>
+                <li>Specification and scope analysis</li>
+            </ul>
+
+            <h3>Market Knowledge</h3>
+            <ul>
+                <li>Australian commercial solar regulations</li>
+                <li>Current market rates and pricing trends</li>
+                <li>Supplier and subcontractor networks</li>
+                <li>Commercial building integration requirements</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <h2>Project Scope</h2>
+            </div>
+            
+            <h3>System Types</h3>
+            <ul>
+                <li>Rooftop commercial solar installations</li>
+                <li>Ground-mount commercial systems</li>
+                <li>Carport and canopy solar structures</li>
+                <li>Mixed-use and industrial solar projects</li>
+            </ul>
+
+            <h3>Deliverables</h3>
+            <ul>
+                <li>Detailed cost breakdowns and estimates</li>
+                <li>Comprehensive Bill of Materials (BOMs)</li>
+                <li>RFQ and tender documentation</li>
+                <li>Client-ready proposals and presentations</li>
+                <li>Supplier comparison and analysis reports</li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h3>🌟 Work Arrangement</h3>
+            <p><strong>📍 Location:</strong> Greater Melbourne / Remote</p>
+            <p><strong>🕒 Hours:</strong> Part-Time | Flexible</p>
+            <p><strong>🌏 Time Zone:</strong> Australian (AU)</p>
+            <p style="margin-top: 10px; font-size: 0.85em; opacity: 0.9;">Join the clean energy revolution with flexible work arrangements designed for experienced professionals</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">💼</div>
+                <h2>Why This Role?</h2>
+            </div>
+            
+            <ul>
+                <li><strong>Flexibility:</strong> Part-time hours that fit your schedule</li>
+                <li><strong>Remote Option:</strong> Work from anywhere in Australia</li>
+                <li><strong>Growing Industry:</strong> Be part of the clean energy transition</li>
+                <li><strong>Professional Growth:</strong> Work with commercial-scale projects</li>
+                <li><strong>Autonomy:</strong> Independent work environment for self-starters</li>
+                <li><strong>Impact:</strong> Contribute to Australia's renewable energy goals</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🚀</div>
+                <h2>Success Profile</h2>
+            </div>
+            
+            <h3>Ideal Candidate</h3>
+            <ul>
+                <li>5+ years in solar or electrical estimation</li>
+                <li>Active Estimate One platform user</li>
+                <li>Strong commercial acumen and attention to detail</li>
+                <li>Excellent communication with builders and stakeholders</li>
+                <li>Self-motivated with proven remote work capability</li>
+                <li>Up-to-date with Australian solar industry trends</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>🎯 Perfect For:</strong> Experienced estimators seeking flexible part-time work in the booming commercial solar sector
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>2026 Commercial Solar Estimator Guide</strong></p>
+            <p>☀️ Powering Australia's Clean Energy Future</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">This guide provides comprehensive information for prospective Commercial Solar Estimators in the Australian market</p>
+        </div>
+    </div>
+
+    <script>
+        // System Size Calculator
+        function calculateSystemSize() {
+            const dailyUsage = parseFloat(document.getElementById('dailyUsage').value);
+            const sunHours = parseFloat(document.getElementById('sunHours').value);
+            const efficiency = parseFloat(document.getElementById('efficiency').value);
+
+            if (!dailyUsage || !sunHours || !efficiency) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const systemSize = (dailyUsage / sunHours) / (efficiency / 100);
+            const panelCount = Math.ceil((systemSize * 1000) / 400); // Assuming 400W panels
+            const roofArea = panelCount * 1.9; // Assuming 1.9m² per panel
+
+            const resultDiv = document.getElementById('systemResult');
+            const resultText = document.getElementById('resultText');
+            
+            resultText.innerHTML = `
+                <strong>Recommended System Size:</strong> ${systemSize.toFixed(1)} kW<br>
+                <strong>Number of Panels (400W):</strong> ${panelCount} panels<br>
+                <strong>Minimum Roof Area:</strong> ${roofArea.toFixed(0)} m²<br>
+                <strong>Expected Annual Production:</strong> ${(systemSize * sunHours * 365 * (efficiency/100)).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} kWh/year
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Cost Estimator
+        function setPerWatt(value) {
+            document.getElementById('costPerWatt').value = value;
+        }
+
+        function calculateCost() {
+            const systemSize = parseFloat(document.getElementById('systemSize').value);
+            const costPerWatt = parseFloat(document.getElementById('costPerWatt').value);
+            const margin = parseFloat(document.getElementById('margin').value);
+
+            if (!systemSize || !costPerWatt || !margin) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const baseCost = systemSize * 1000 * costPerWatt;
+            const totalCost = baseCost * (1 + margin / 100);
+            const gstAmount = totalCost * 0.1;
+            const totalWithGST = totalCost + gstAmount;
+
+            const resultDiv = document.getElementById('costResult');
+            const resultText = document.getElementById('costText');
+            
+            resultText.innerHTML = `
+                <strong>Base Cost (materials + labour):</strong> $${baseCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<br>
+                <strong>Profit Margin (${margin}%):</strong> $${(totalCost - baseCost).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<br>
+                <strong>Subtotal (ex GST):</strong> $${totalCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<br>
+                <strong>GST (10%):</strong> $${gstAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<br>
+                <strong style="color: var(--accent-yellow); font-size: 1.1em;">Total (inc GST):</strong> $${totalWithGST.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // ROI Calculator
+        function calculateROI() {
+            const totalCost = parseFloat(document.getElementById('totalCost').value);
+            const annualProduction = parseFloat(document.getElementById('annualProduction').value);
+            const electricityRate = parseFloat(document.getElementById('electricityRate').value);
+
+            if (!totalCost || !annualProduction || !electricityRate) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const annualSavings = annualProduction * electricityRate;
+            const paybackYears = totalCost / annualSavings;
+            const totalSavings25Years = (annualSavings * 25) - totalCost;
+            const roi = ((totalSavings25Years / totalCost) * 100);
+
+            const resultDiv = document.getElementById('roiResult');
+            const resultText = document.getElementById('roiText');
+            
+            resultText.innerHTML = `
+                <strong>Annual Electricity Savings:</strong> $${annualSavings.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/year<br>
+                <strong style="color: var(--accent-yellow); font-size: 1.1em;">Payback Period:</strong> ${paybackYears.toFixed(1)} years<br>
+                <strong>25-Year Savings:</strong> $${totalSavings25Years.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<br>
+                <strong>Return on Investment:</strong> ${roi.toFixed(0)}% over 25 years
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Toggle tutorial content
+        function toggleTutorial(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.expand-icon');
+            const allContents = document.querySelectorAll('.tutorial-content');
+            const allIcons = document.querySelectorAll('.expand-icon');
+            
+            // Close all other tutorials
+            allContents.forEach((item, index) => {
+                if (item !== content && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    allIcons[index].style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current tutorial
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+                // Smooth scroll to tutorial
+                setTimeout(() => {
+                    header.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+
+        // Smooth scroll performance optimization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add touch feedback for cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                card.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Add touch feedback for tutorial headers
+            const tutorialHeaders = document.querySelectorAll('.tutorial-header');
+            tutorialHeaders.forEach(header => {
+                header.addEventListener('touchstart', function() {
+                    this.style.background = 'rgba(255,107,0,0.25)';
+                });
+                header.addEventListener('touchend', function() {
+                    this.style.background = 'rgba(255,107,0,0.1)';
+                });
+            });
+
+            // Prevent zoom on double tap for better UX
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(event) {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+
+            // Log app load
+            console.log('2026 Commercial Solar Estimator Guide loaded successfully ☀️');
+            console.log('Interactive tutorials ready - tap any responsibility to view guide');
+        });
+
+        // Service Worker for offline capability (optional enhancement)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Service worker registration would go here for PWA functionality
+                console.log('App ready for offline use');
+            });
+        }
+    </script>
+</body>
+</html>
